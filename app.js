@@ -1,3 +1,5 @@
+let tg = window.Telegram.WebApp;
+console.log(tg)
 let randomDegree = 0;
 let randomTurns = 0;
 let actualDeg = 0;
