@@ -1,6 +1,6 @@
 let tg = window.Telegram.WebApp;
 let parent_element = document.getElementById("buttonSpin");
-parent_element.textContent = tg.WebAppUser;
+parent_element.textContent = toString(tg.WebAppUser.id);
 let randomDegree = 0;
 let randomTurns = 0;
 let actualDeg = 0;
