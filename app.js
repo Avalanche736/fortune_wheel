@@ -114,6 +114,7 @@ function spin() {
 }
 
 function close() {
+    console.log('try to close');
     if (is_data_done == 1) {
         tg.sendData(JSON.stringify(data));
     }
