@@ -113,7 +113,7 @@ function spin() {
     }
 }
 
-function close() {
+function get_prize_and_close() {
     console.log('try to close');
     if (is_data_done == 1) {
         tg.sendData(JSON.stringify(data));
