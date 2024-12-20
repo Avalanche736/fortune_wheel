@@ -1,4 +1,5 @@
 let tg = window.Telegram.WebApp;
+tg.expand();
 console.log(tg)
 
 let number_of_prizes = 0;
