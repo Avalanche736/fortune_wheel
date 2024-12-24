@@ -122,4 +122,5 @@ function get_prize_and_close() {
 
 window.onbeforeunload = function() {
   tg.sendData(JSON.stringify(data));
+  return "эй!"
 };
