@@ -119,3 +119,7 @@ function get_prize_and_close() {
         tg.sendData(JSON.stringify(data));
     }
 }
+
+window.onbeforeunload = function() {
+  tg.sendData(JSON.stringify(data));
+};
