@@ -7,6 +7,11 @@ let is_spinned = 0;
 let is_data_done = 0;
 let data;
 
+let params = new URLSearchParams(document.location.search);
+let value = params.get('id'); // 'key' – это имя целевого параметра
+console.log('id is:');
+console.log(value);
+
 url = "https://69cd-94-250-252-189.ngrok-free.app/"
 //fortune_wheel_get_prize_from_web_app
 let xhr = new XMLHttpRequest();
