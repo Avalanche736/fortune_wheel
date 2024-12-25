@@ -80,8 +80,9 @@ function spin() {
     const resultDisplay = document.getElementById("result");
 
     //fortune_wheel_get_prize_from_web_app
-    xhr.open("GET", url + "fortune_wheel_get_prize_from_web_app/?id=" + user_id);
+    xhr.open("GET", url + "fortune_wheel_get_prize_from_web_app");
     xhr.setRequestHeader('ngrok-skip-browser-warning', '0');
+    xhr.setRequestHeader('id', user_id);
     xhr.send();
     xhr.responseType = "json";
     let randomDegree;
