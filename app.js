@@ -90,10 +90,14 @@ function spin() {
     xhr.onload = () => {
         console.log("результат запроса");
         console.log(xhr.response);
-        if (xhr.response == "У вас уже есть приз") {
-            console.log("Чекчекчек");
-        }
-        if (xhr.readyState == 4 && xhr.status == 200) {
+        if (xhr.response['status'] == '1') {
+            //если приз уже был получен
+            data = xhr.response;
+            is_data_done = 1;
+            document.getElementById('buttonSpin').style.display = 'none';
+            document.getElementById('buttonGet').textContent = 'Получить qr-код снова';
+            document.getElementById('buttonGet').style.display = 'inline-block';
+        } else if (xhr.readyState == 4 && xhr.status == 200) {
             let number_of_prize = 0;
             for (let i = 0; i < number_of_prizes; i++) {
                 if (xhr.response['name'] === prize_names[i]) {
