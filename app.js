@@ -8,9 +8,7 @@ let is_data_done = 0;
 let data;
 
 let params = new URLSearchParams(document.location.search);
-let value = params.get('id'); // 'key' – это имя целевого параметра
-console.log('id is:');
-console.log(value);
+let user_id = params.get('id'); // 'key' – это имя целевого параметр
 
 url = "https://69cd-94-250-252-189.ngrok-free.app/"
 //fortune_wheel_get_prize_from_web_app
@@ -82,13 +80,17 @@ function spin() {
     const resultDisplay = document.getElementById("result");
 
     //fortune_wheel_get_prize_from_web_app
-    xhr.open("GET", url + "fortune_wheel_get_prize_from_web_app");
+    xhr.open("GET", url + "fortune_wheel_get_prize_from_web_app?id=" + user_id);
     xhr.setRequestHeader('ngrok-skip-browser-warning', '0');
     xhr.send();
     xhr.responseType = "json";
     let randomDegree;
 
     xhr.onload = () => {
+        console.log(xhr.response);
+        if (xhr.response == "У вас уже есть приз") {
+            console.log("Чекчекчек");
+        }
         if (xhr.readyState == 4 && xhr.status == 200) {
             let number_of_prize = 0;
             for (let i = 0; i < number_of_prizes; i++) {
