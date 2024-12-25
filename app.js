@@ -88,6 +88,7 @@ function spin() {
     let randomDegree;
 
     xhr.onload = () => {
+        console.log("результат запроса");
         console.log(xhr.response);
         if (xhr.response == "У вас уже есть приз") {
             console.log("Чекчекчек");
