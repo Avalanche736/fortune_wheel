@@ -10,7 +10,7 @@ let data;
 let params = new URLSearchParams(document.location.search);
 let user_id = params.get('id'); // 'key' – это имя целевого параметр
 
-url = "https://69cd-94-250-252-189.ngrok-free.app/"
+url = "https://8cca-94-250-252-189.ngrok-free.app/"
 //fortune_wheel_get_prize_from_web_app
 let xhr = new XMLHttpRequest();
 xhr.open("GET", url + "fortune_wheel_get_prizes_data");
