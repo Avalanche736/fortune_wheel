@@ -10,7 +10,7 @@ let data;
 let params = new URLSearchParams(document.location.search);
 let user_id = params.get('id'); // 'key' – это имя целевого параметр
 
-url = "https://8cca-94-250-252-189.ngrok-free.app/"
+url = "https://3294-45-114-62-71.ngrok-free.app/"
 //fortune_wheel_get_prize_from_web_app
 let xhr = new XMLHttpRequest();
 xhr.open("GET", url + "fortune_wheel_get_prizes_data");
@@ -41,33 +41,32 @@ xhr.onload = () => {
                 backgorund_str += ", ";
             }
 
+
             // TODO надпись c названием надо или не надо?
 
         }
 
         wheel.style.background = backgorund_str;
-
-
-        // food_items = xhr.response['food'];
-        // additions_items = xhr.response['additions']
-        // additions_lists_items = xhr.response['additions_lists'];
-        // for (const item of food_items) {
-        //     //console.log(item);
-        //     if (item['in_stock'] < 1) {
-        //         continue;
-        //     }
-        //     let item_copy = item;
-        //     //Добавить в список товаров на главной странице
-        //     copyItemToMainPageProductsList(item_copy, item['category']);
-        //     //Добавить в популярное
-        //     if (item['is_popular'] == 1) {
-        //         copyItemToMainPageProductsList(item_copy, "Популярное");
-        //     }
-        // }
     } else {
         console.log(`Error: ${xhr.status}`);
     }
 };
+
+// let xhr1 = new XMLHttpRequest();
+// xhr1.open("GET", url + "get_fortune_wheel_amount");
+// xhr1.setRequestHeader('ngrok-skip-browser-warning', '0');
+// xhr1.setRequestHeader('id', user_id);
+// xhr1.send();
+// xhr1.responseType = "json";
+// xhr1.onload = () => {
+//     if (xhr1.readyState == 4 && xhr.status == 200) {
+//         console.log("get_fortune_wheel_amount");
+//         console.log(xhr.response);
+//     } else {
+//         console.log(`Error: ${xhr.status}`);
+//     }
+// };
+
 
 function spin() {
     //TODO УДАЛИТЬ КНОПКУ spin
