@@ -112,43 +112,28 @@ function spin() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             console.log("результат запроса");
             console.log(xhr.response);
-            if (xhr.response['status'] == '0' || xhr.response['status'] == '1') {
-                //если приз уже был получен
+            let number_of_prize = 0;
+            for (let i = 0; i < number_of_prizes; i++) {
+                if (xhr.response['name'] === prize_names[i]) {
+                    number_of_prize = i;
+                }
+            }
+            randomDegree = (number_of_prize / number_of_prizes) * 360 + Math.floor(Math.random() * 360 / number_of_prizes) + Math.floor(Math.random() * 4) * 360 + 720;
+
+            wheel.style.transition = "transform 5s ease-out";
+            wheel.style.transform = `rotate(${randomDegree}deg)`;
+
+            console.log(number_of_prize);
+            console.log(randomDegree);
+
+            setTimeout(() => {
+                resultDisplay.textContent = `Результат: ${xhr.response['name']} ${number_of_prize} ${randomDegree}`;
                 data = xhr.response;
                 is_data_done = 1;
                 document.getElementById('buttonSpin').style.display = 'none';
-                document.getElementById('buttonGet').textContent = 'Получить qr-код снова';
                 document.getElementById('buttonGet').style.display = 'inline-block';
-            } else if (xhr.response['status'] == '2') {
-                //если приз уже был получен
-                data = "Вы уже получили приз";
-                is_data_done = 1;
-                document.getElementById('buttonSpin').style.display = 'none';
-                document.getElementById('buttonGet').textContent = 'Вы уже получили приз';
-                document.getElementById('buttonGet').style.display = 'inline-block';
-            } else {
-                let number_of_prize = 0;
-                for (let i = 0; i < number_of_prizes; i++) {
-                    if (xhr.response['name'] === prize_names[i]) {
-                        number_of_prize = i;
-                    }
-                }
-                randomDegree = (number_of_prize / number_of_prizes) * 360 + Math.floor(Math.random() * 360 / number_of_prizes) + Math.floor(Math.random() * 4) * 360 + 720;
+            }, 5000);
 
-                wheel.style.transition = "transform 5s ease-out";
-                wheel.style.transform = `rotate(${randomDegree}deg)`;
-
-                console.log(number_of_prize);
-                console.log(randomDegree);
-
-                setTimeout(() => {
-                    resultDisplay.textContent = `Результат: ${xhr.response['name']} ${number_of_prize} ${randomDegree}`;
-                    data = xhr.response;
-                    is_data_done = 1;
-                    document.getElementById('buttonSpin').style.display = 'none';
-                    document.getElementById('buttonGet').style.display = 'inline-block';
-                }, 5000);
-            }
         } else {
             console.log(`Error: ${xhr.status}`);
         }
