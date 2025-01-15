@@ -63,7 +63,7 @@ xhr1.onload = () => {
         console.log("get_fortune_wheel_amount");
         console.log("Ваш баланс " + xhr1.response['user_amount'] + "/1000");
         const balance = document.getElementById("balance");
-        balance.style.color = tg.ThemeParams.text_color;
+        //balance.style.color = tg.ThemeParams.text_color;
         balance.textContent = "Ваш баланс ";
         //parseInt(xhr1.response['user_amount']/1000);
         balance.textContent += xhr1.response['user_amount'] / 1000;
