@@ -61,7 +61,7 @@ xhr1.responseType = "json";
 xhr1.onload = () => {
     if (xhr1.readyState == 4 && xhr.status == 200) {
         console.log("get_fortune_wheel_amount");
-        console.log(xhr1.response);
+        console.log("Ваш баланс " + xhr1.response['user_amount']) + "/1000");
     } else {
         console.log(`Error: ${xhr1.status}`);
     }
