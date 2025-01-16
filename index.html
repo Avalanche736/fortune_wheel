@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="balance" id="balance" style="margin: 5%; color: var(--tg-theme-text-color); background-color: #c0c0c0"></div>
+    <div class="balance" id="balance" style="margin: 5%; color: var(--tg-theme-text-color); background-color: var(--tg-theme-bg-color)"></div>
     <div class="wheel-container" id="wheel-container">
         <div class="wheel" id="wheel">
 
@@ -17,6 +17,7 @@
         <button id="buttonSpin" onclick="spin();" style="display: none">Spin</button>
         <button id="buttonGet" onclick="get_prize_and_close();" style="display: none">Получить приз</button>
     </div>
+    <div style="margin: 5%; color: var(--tg-theme-text-color); background-color: var(--tg-theme-bg-color)">После выпадения приза необходимо нажать кнопку «получить». Если кнопка нажата не была, приз сгорает, вращая колесо вы соглашаетесь с данным условием</div>
     <p id="result"></p>
 
     <script src="app.js"></script>
