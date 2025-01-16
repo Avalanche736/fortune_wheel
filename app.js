@@ -67,47 +67,49 @@ xhr.onload = () => {
         }
 
         wheel.style.background = backgorund_str;
+
+        let xhr1 = new XMLHttpRequest();
+        xhr1.open("GET", url + "get_fortune_wheel_amount");
+        xhr1.setRequestHeader('ngrok-skip-browser-warning', '0');
+        xhr1.setRequestHeader('id', user_id);
+        xhr1.send();
+        xhr1.responseType = "json";
+        xhr1.onload = () => {
+            if (xhr1.readyState == 4 && xhr.status == 200) {
+                console.log("get_fortune_wheel_amount");
+                console.log("Ваш баланс " + xhr1.response['user_amount'] + "/1000");
+                const balance = document.getElementById("balance");
+                //balance.style.color = tg.ThemeParams.text_color;
+                balance.textContent = "Ваш баланс ";
+                //parseInt(xhr1.response['user_amount']/1000);
+                balance.textContent += Math.floor(xhr1.response['user_amount']/1000) + " ";
+                let number_of_turns = Math.floor(xhr1.response['user_amount']/1000);
+                if (number_of_turns % 100 >= 11 && number_of_turns % 100 <= 14) { // Особый случай для чисел от 11 до 14
+                    balance.textContent += "вращений";
+                } else {
+                    const modulo = number_of_turns % 10;
+                    if (modulo === 1) {
+                        balance.textContent += "вращение";
+                    } else if (modulo >= 2 && modulo <= 4) {
+                        balance.textContent += "вращения";
+                    } else {
+                        balance.textContent += "вращений";
+                    }
+                }
+                balance.textContent += ", до следующего вращения " + xhr1.response['user_amount'] % 1000 + "/1000";
+                if (xhr1.response['user_amount'] > 1000) {
+                    document.getElementById("buttonSpin").style.display = 'inline-block';
+                }
+            } else {
+                console.log(`Error: ${xhr1.status}`);
+            }
+        };
     } else {
         console.log(`Error: ${xhr.status}`);
     }
 };
 
-let xhr1 = new XMLHttpRequest();
-xhr1.open("GET", url + "get_fortune_wheel_amount");
-xhr1.setRequestHeader('ngrok-skip-browser-warning', '0');
-xhr1.setRequestHeader('id', user_id);
-xhr1.send();
-xhr1.responseType = "json";
-xhr1.onload = () => {
-    if (xhr1.readyState == 4 && xhr.status == 200) {
-        console.log("get_fortune_wheel_amount");
-        console.log("Ваш баланс " + xhr1.response['user_amount'] + "/1000");
-        const balance = document.getElementById("balance");
-        //balance.style.color = tg.ThemeParams.text_color;
-        balance.textContent = "Ваш баланс ";
-        //parseInt(xhr1.response['user_amount']/1000);
-        balance.textContent += Math.floor(xhr1.response['user_amount']/1000) + " ";
-        let number_of_turns = Math.floor(xhr1.response['user_amount']/1000);
-        if (number_of_turns % 100 >= 11 && number_of_turns % 100 <= 14) { // Особый случай для чисел от 11 до 14
-            balance.textContent += "вращений";
-        } else {
-            const modulo = number_of_turns % 10;
-            if (modulo === 1) {
-                balance.textContent += "вращение";
-            } else if (modulo >= 2 && modulo <= 4) {
-                balance.textContent += "вращения";
-            } else {
-                balance.textContent += "вращений";
-            }
-        }
-        balance.textContent += ", до следующего вращения " + xhr1.response['user_amount'] % 1000 + "/1000";
-        if (xhr1.response['user_amount'] > 1000) {
-            document.getElementById("buttonSpin").style.display = 'inline-block';
-        }
-    } else {
-        console.log(`Error: ${xhr1.status}`);
-    }
-};
+
 
 
 function spin() {
