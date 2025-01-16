@@ -25,6 +25,7 @@ xhr.onload = () => {
         const wheel_container = document.getElementById("wheel-container");
         backgorund_str = "conic-gradient(";
         number_of_prizes = xhr.response['number_of_prizes'];
+        const radius = 30; // Радиус в процентах от размера колеса
         for (let i = 0; i < number_of_prizes; i++) {
             prize_names.push(xhr.response['prizes_names'][i])
             //фон
@@ -43,7 +44,26 @@ xhr.onload = () => {
 
 
             // TODO надпись c названием надо или не надо?
+            const letterElement = document.createElement("div");
+            letterElement.textContent = xhr.response['prizes_names'][i];
+            letterElement.classList.add("letters");
 
+            // Угол поворота в радианах
+            //const angle = ((2 * (i - 1)) * 2 * Math.PI / (2 * n));
+            const angle = i * 2 * Math.PI / number_of_prizes + Math.PI / number_of_prizes - Math.PI / 2;
+            //const angle = 2 * Math.PI - ((2 * i + 1) * 2 * Math.PI / (2 * n));
+
+            // Вычисление координат
+            const x = 50 + Math.cos(angle) * radius;
+            const y = 50 + Math.sin(angle) * radius;
+
+            // Установка стилей для позиции и поворота
+            letterElement.style.left = `${x}%`;
+            letterElement.style.top = `${y}%`;
+            letterElement.style.transform = `translate(-50%, -50%) rotate(${angle}rad)`;
+
+            // Добавление элемента в колесо
+            wheel.appendChild(letterElement);
         }
 
         wheel.style.background = backgorund_str;
@@ -66,8 +86,8 @@ xhr1.onload = () => {
         //balance.style.color = tg.ThemeParams.text_color;
         balance.textContent = "Ваш баланс ";
         //parseInt(xhr1.response['user_amount']/1000);
-        balance.textContent += Math.floor(xhr1.response['user_amount']/1000);
-        let number_of_turns = Math.floor(xhr1.response['user_amount']/1000) + " ";
+        balance.textContent += Math.floor(xhr1.response['user_amount']/1000) + " ";
+        let number_of_turns = Math.floor(xhr1.response['user_amount']/1000);
         if (number_of_turns % 100 >= 11 && number_of_turns % 100 <= 14) { // Особый случай для чисел от 11 до 14
             balance.textContent += "вращений";
         } else {
