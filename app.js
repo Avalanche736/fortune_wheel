@@ -141,13 +141,13 @@ function spin() {
             randomDegree = (number_of_prize / number_of_prizes) * 360 + Math.floor(Math.random() * 360 / number_of_prizes) + Math.floor(Math.random() * 4) * 360 + 720;
 
             wheel.style.transition = "transform 5s ease-out";
-            wheel.style.transform = `rotate(${randomDegree}deg)`;
+            wheel.style.transform = `rotate(${-randomDegree}deg)`;
 
             console.log(number_of_prize);
             console.log(randomDegree);
 
             setTimeout(() => {
-                resultDisplay.textContent = `Результат: ${xhr.response['name']} ${number_of_prize} ${randomDegree}`;
+                resultDisplay.textContent = `Результат: ${xhr.response['name']}`;
                 data = xhr.response;
                 is_data_done = 1;
                 document.getElementById('buttonSpin').style.display = 'none';
